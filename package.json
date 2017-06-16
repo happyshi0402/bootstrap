@@ -33,8 +33,9 @@
     "js-lint": "eslint js/ && eslint --config js/tests/.eslintrc.json --env node build/ Gruntfile.js",
     "js-lint-docs": "eslint --config js/tests/.eslintrc.json assets/js/",
     "js-compile": "npm-run-all --parallel js-compile-*",
-    "js-compile-bundle": "npm run rollupbuild",
-    "js-compile-plugins": "babel js/src/ --out-dir js/dist/ --source-maps",
+    "js-compile-bundle": "node ./build/build-dist.js",
+    "postjs-compile-bundle": "node build/stamp.js bootstrap.js",
+    "js-compile-plugins": "node ./build/build-plugins.js",
     "js-minify": "uglifyjs --compress warnings=false --mangle --output dist/js/bootstrap.min.js dist/js/bootstrap.js",
     "postjs-minify": "node build/stamp.js bootstrap.min.js",
     "js-minify-docs": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output assets/js/docs.min.js assets/js/vendor/anchor.min.js assets/js/vendor/clipboard.min.js assets/js/vendor/holder.min.js assets/js/src/application.js",
@@ -56,9 +57,7 @@
     "test": "npm-run-all dist js-test docs",
     "watch-css": "nodemon --ignore js/ --ignore dist/ -e scss -x \"npm run css && npm run css-docs\"",
     "watch-js": "nodemon --ignore scss/ --ignore js/dist/ --ignore dist/ -e js -x \"npm run js-compile-plugins\"",
-    "watch": "npm-run-all --parallel watch-css watch-js",
-    "rollupbuild": "rollup --config build/rollup.config.js",
-    "postrollupbuild": "node build/stamp.js bootstrap.js"
+    "watch": "npm-run-all --parallel watch-css watch-js"
   },
   "style": "dist/css/bootstrap.css",
   "sass": "scss/bootstrap.scss",
