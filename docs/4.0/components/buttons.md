@@ -3,34 +3,18 @@ layout: docs
 title: Buttons
 description: Use Bootstrap's custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
 group: components
-redirect_from: "/components/"
+redirect_from: "/docs/4.0/components/"
 toc: true
 ---
 
 ## Examples
 
-Bootstrap includes six predefined button styles, each serving its own semantic purpose.
+Bootstrap includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
 
 {% example html %}
-<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-<button type="button" class="btn btn-primary">Primary</button>
+{% for color in site.data.theme-colors %}
+<button type="button" class="btn btn-{{ color.name }}">{{ color.name | capitalize }}</button>{% endfor %}
 
-<!-- Secondary, outline button -->
-<button type="button" class="btn btn-secondary">Secondary</button>
-
-<!-- Indicates a successful or positive action -->
-<button type="button" class="btn btn-success">Success</button>
-
-<!-- Contextual button for informational alert messages -->
-<button type="button" class="btn btn-info">Info</button>
-
-<!-- Indicates caution should be taken with this action -->
-<button type="button" class="btn btn-warning">Warning</button>
-
-<!-- Indicates a dangerous or potentially negative action -->
-<button type="button" class="btn btn-danger">Danger</button>
-
-<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
 <button type="button" class="btn btn-link">Link</button>
 {% endexample %}
 
@@ -56,14 +40,9 @@ When using button classes on `<a>` elements that are used to trigger in-page fun
 In need of a button, but not the hefty background colors they bring? Replace the default modifier classes with the `.btn-outline-*` ones to remove all background images and colors on any button.
 
 {% example html %}
-<button type="button" class="btn btn-outline-primary">Primary</button>
-<button type="button" class="btn btn-outline-secondary">Secondary</button>
-<button type="button" class="btn btn-outline-success">Success</button>
-<button type="button" class="btn btn-outline-info">Info</button>
-<button type="button" class="btn btn-outline-warning">Warning</button>
-<button type="button" class="btn btn-outline-danger">Danger</button>
+{% for color in site.data.theme-colors %}
+<button type="button" class="btn btn-outline-{{ color.name }}">{{ color.name | capitalize }}</button>{% endfor %}
 {% endexample %}
-
 
 ## Sizes
 
@@ -116,7 +95,7 @@ Disabled buttons using the `<a>` element behave a bit different:
 {% endexample %}
 
 {% callout warning %}
-#### Link functionality caveat
+##### Link functionality caveat
 
 The `.disabled` class uses `pointer-events: none` to try to disable the link functionality of `<a>`s, but that CSS property is not yet standardized. In addition, even in browsers that do support `pointer-events: none`, keyboard navigation remains unaffected, meaning that sighted keyboard users and users of assistive technologies will still be able to activate these links. So to be safe, add a `tabindex="-1"` attribute on these links (to prevent them from receiving keyboard focus) and use custom JavaScript to disable their functionality.
 {% endcallout %}
@@ -137,36 +116,30 @@ Add `data-toggle="button"` to toggle a button's `active` state. If you're pre-to
 
 ### Checkbox and radio buttons
 
-Bootstrap's `.button` styles can be applied to other elements, such as `<label>`s, to provide checkbox or radio style button toggling. Add `data-toggle="buttons"` to a `.btn-group` containing those modified buttons to enable toggling in their respective styles.
+Bootstrap's `.button` styles can be applied to other elements, such as `<label>`s, to provide checkbox or radio style button toggling. Add `data-toggle="buttons"` to a `.btn-group` containing those modified buttons to enable their toggling behavior via JavaScript and add `.btn-group-toggle` to style the `<input>`s within your buttons. **Note that you can create single input-powered buttons or groups of them.**
 
 The checked state for these buttons is **only updated via `click` event** on the button. If you use another method to update the input—e.g., with `<input type="reset">` or by manually applying the input's `checked` property—you'll need to toggle `.active` on the `<label>` manually.
 
 Note that pre-checked buttons require you to manually add the `.active` class to the input's `<label>`.
 
 {% example html %}
-<div class="btn-group" data-toggle="buttons">
+<div class="btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
-  </label>
-  <label class="btn btn-secondary">
-    <input type="checkbox" autocomplete="off"> Checkbox 2
-  </label>
-  <label class="btn btn-secondary">
-    <input type="checkbox" autocomplete="off"> Checkbox 3
+    <input type="checkbox" checked autocomplete="off"> Checked
   </label>
 </div>
 {% endexample %}
 
 {% example html %}
-<div class="btn-group" data-toggle="buttons">
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+    <input type="radio" name="options" id="option2" autocomplete="off"> Radio
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+    <input type="radio" name="options" id="option3" autocomplete="off"> Radio
   </label>
 </div>
 {% endexample %}
@@ -175,4 +148,5 @@ Note that pre-checked buttons require you to manually add the `.active` class to
 
 | Method | Description |
 | --- | --- |
-| `$().button('toggle')` |Toggles push state. Gives the button the appearance that it has been activated.  |
+| `$().button('toggle')` | Toggles push state. Gives the button the appearance that it has been activated. |
+| `$().button('dispose')` | Destroys an element's button. |

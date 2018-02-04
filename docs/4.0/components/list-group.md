@@ -56,7 +56,7 @@ Be sure to **not use the standard `.btn` classes here**.
 
 {% example html %}
 <div class="list-group">
-  <a href="#" class="list-group-item active">
+  <a href="#" class="list-group-item list-group-item-action active">
     Cras justo odio
   </a>
   <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
@@ -80,6 +80,20 @@ With `<button>`s, you can also make use of the `disabled` attribute instead of t
 </div>
 {% endexample %}
 
+## Flush
+
+Add `.list-group-flush` to remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards).
+
+{% example html %}
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item">Morbi leo risus</li>
+  <li class="list-group-item">Porta ac consectetur ac</li>
+  <li class="list-group-item">Vestibulum at eros</li>
+</ul>
+{% endexample %}
+
 ## Contextual classes
 
 Use contextual classes to style list items with a stateful background and color.
@@ -87,10 +101,9 @@ Use contextual classes to style list items with a stateful background and color.
 {% example html %}
 <ul class="list-group">
   <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
-  <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
-  <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
-  <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+
+  {% for color in site.data.theme-colors %}
+  <li class="list-group-item list-group-item-{{ color.name }}">This is a {{ color.name }} list group item</li>{% endfor %}
 </ul>
 {% endexample %}
 
@@ -99,10 +112,9 @@ Contextual classes also work with `.list-group-item-action`. Note the addition o
 {% example html %}
 <div class="list-group">
   <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item list-group-item-action list-group-item-success">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item list-group-item-action list-group-item-info">Cras sit amet nibh libero</a>
-  <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Vestibulum at eros</a>
+
+  {% for color in site.data.theme-colors %}
+  <a href="#" class="list-group-item list-group-item-action list-group-item-{{ color.name }}">This is a {{ color.name }} list group item</a>{% endfor %}
 </div>
 {% endexample %}
 
@@ -111,28 +123,28 @@ Contextual classes also work with `.list-group-item-action`. Note the addition o
 
 ## With badges
 
-Add badges to any list group item to show unread counts, activity, and more with the help of some [utilities]({{ site.baseurl }}/docs/{{ site.docs_version }}/utilities/flexbox/).
+Add badges to any list group item to show unread counts, activity, and more with the help of some [utilities]({{ site.baseurl }}/docs/{{ site.docs_version }}/utilities/flex/).
 
 {% example html %}
 <ul class="list-group">
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Cras justo odio
-    <span class="badge badge-default badge-pill">14</span>
+    <span class="badge badge-primary badge-pill">14</span>
   </li>
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Dapibus ac facilisis in
-    <span class="badge badge-default badge-pill">2</span>
+    <span class="badge badge-primary badge-pill">2</span>
   </li>
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Morbi leo risus
-    <span class="badge badge-default badge-pill">1</span>
+    <span class="badge badge-primary badge-pill">1</span>
   </li>
 </ul>
 {% endexample %}
 
 ## Custom content
 
-Add nearly any HTML within, even for linked list groups like the one below, with the help of [flexbox utilities]({{ site.baseurl }}/docs/{{ site.docs_version }}/utilities/flexbox/).
+Add nearly any HTML within, even for linked list groups like the one below, with the help of [flexbox utilities]({{ site.baseurl }}/docs/{{ site.docs_version }}/utilities/flex/).
 
 {% example html %}
 <div class="list-group">
@@ -171,10 +183,10 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
   <div class="row">
     <div class="col-4">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="tab" href="#list-home" role="tab" aria-controls="home">Home</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="tab" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="tab" href="#list-home" role="tab" aria-controls="list-home">Home</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="tab" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
+        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="tab" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="tab" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
       </div>
     </div>
     <div class="col-8">
@@ -219,7 +231,7 @@ Use the tab JavaScript plugin—include it individually or through the compiled 
 
 ### Using data attributes
 
-You can activate a list group navigation without writing any JavaScript by simply specifying `data-toggle="list"` or  on an element. Use these data attributes on `.list-group-item`.
+You can activate a list group navigation without writing any JavaScript by simply specifying `data-toggle="list"` or on an element. Use these data attributes on `.list-group-item`.
 
 <div role="tabpanel">
 {% highlight html %}
@@ -246,7 +258,7 @@ You can activate a list group navigation without writing any JavaScript by simpl
 Enable tabbable list item via JavaScript (each list item needs to be activated individually):
 
 {% highlight js %}
-$('#myList a').click(function (e) {
+$('#myList a').on('click', function (e) {
   e.preventDefault()
   $(this).tab('show')
 })
@@ -256,9 +268,9 @@ You can activate individual list item in several ways:
 
 {% highlight js %}
 $('#myList a[href="#profile"]').tab('show') // Select tab by name
-$('#myList a:first').tab('show') // Select first tab
-$('#myList a:last').tab('show') // Select last tab
-$('#myList li:eq(2) a').tab('show') // Select third tab (0-indexed)
+$('#myList a:first-child').tab('show') // Select first tab
+$('#myList a:last-child').tab('show') // Select last tab
+$('#myList a:nth-child(3)').tab('show') // Select third tab
 {% endhighlight %}
 
 ### Fade effect
@@ -297,7 +309,7 @@ Activates a list item element and content container. Tab should have either a `d
 
 <script>
   $(function () {
-    $('#myList a:last').tab('show')
+    $('#myList a:last-child').tab('show')
   })
 </script>
 {% endhighlight %}
@@ -321,7 +333,7 @@ When showing a new tab, the events fire in the following order:
 
 If no tab was already active, the `hide.bs.tab` and `hidden.bs.tab` events will not be fired.
 
-<table class="table table-bordered table-striped table-responsive">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th style="width: 150px;">Event type</th>

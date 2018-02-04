@@ -10,7 +10,8 @@ toc: true
 
 Scrollspy has a few requirements to function properly:
 
-- It must to be used on a Bootstrap [nav component]({{ site.baseurl }}/docs/{{ site.docs_version }}/components/navs/) or [list group]({{ site.baseurl }}/docs/{{ site.docs_version }}/components/list-group/).
+- If you're building our JavaScript from source, it [requires `util.js`]({{ site.baseurl }}/docs/{{ site.docs_version }}/getting-started/javascript/#util).
+- It must be used on a Bootstrap [nav component]({{ site.baseurl }}/docs/{{ site.docs_version }}/components/navs/) or [list group]({{ site.baseurl }}/docs/{{ site.docs_version }}/components/list-group/).
 - Scrollspy requires `position: relative;` on the element you're spying on, usually the `<body>`.
 - When spying on elements other than the `<body>`, be sure to have a `height` set and `overflow-y: scroll;` applied.
 - Anchors (`<a>`) are required and must point to an element with that `id`.
@@ -22,7 +23,7 @@ When successfully implemented, your nav or list group will update accordingly, m
 Scroll the area below the navbar and watch the active class change. The dropdown items will be highlighted as well.
 
 <div class="bd-example">
-  <nav id="navbar-example2" class="navbar navbar-light bg-faded">
+  <nav id="navbar-example2" class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <ul class="nav nav-pills">
       <li class="nav-item">
@@ -59,7 +60,7 @@ Scroll the area below the navbar and watch the active class change. The dropdown
 </div>
 
 {% highlight html %}
-<nav id="navbar-example2" class="navbar navbar-light bg-faded">
+<nav id="navbar-example2" class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <ul class="nav nav-pills">
     <li class="nav-item">
@@ -100,7 +101,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
 <div class="bd-example">
   <div class="row">
     <div class="col-4">
-      <nav id="navbar-example3" class="navbar navbar-light bg-faded flex-column">
+      <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column">
         <a class="navbar-brand" href="#">Navbar</a>
         <nav class="nav nav-pills flex-column">
           <a class="nav-link" href="#item-1">Item 1</a>
@@ -139,7 +140,7 @@ Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its p
 </div>
 
 {% highlight html %}
-<nav id="navbar-example3" class="navbar navbar-light bg-faded">
+<nav id="navbar-example3" class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <nav class="nav nav-pills flex-column">
     <a class="nav-link" href="#item-1">Item 1</a>
@@ -279,12 +280,15 @@ $('[data-spy="scroll"]').each(function () {
 })
 {% endhighlight %}
 
+#### `.scrollspy('dispose')`
+
+Destroys an element's scrollspy.
 
 ### Options
 
 Options can be passed via data attributes or JavaScript. For data attributes, append the option name to `data-`, as in `data-offset=""`.
 
-<table class="table table-bordered table-striped table-responsive">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th style="width: 100px;">Name</th>
@@ -305,7 +309,7 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
 
 ### Events
 
-<table class="table table-bordered table-striped table-responsive">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th style="width: 150px;">Event Type</th>
@@ -315,13 +319,13 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
   <tbody>
     <tr>
       <td>activate.bs.scrollspy</td>
-      <td>This event fires whenever a new item becomes activated by the scrollspy.</td>
+      <td>This event fires on the scroll element whenever a new item becomes activated by the scrollspy.</td>
     </tr>
   </tbody>
 </table>
 
 {% highlight js %}
-$('#myScrollspy').on('activate.bs.scrollspy', function () {
+$('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
   // do something…
 })
 {% endhighlight %}
